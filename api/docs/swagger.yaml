@@ -1,0 +1,1498 @@
+definitions:
+  models.Basket:
+    properties:
+      created_at:
+        type: string
+      customer_id:
+        type: string
+      id:
+        type: string
+      total_sum:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.BasketProduct:
+    properties:
+      basket_id:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      product_id:
+        type: string
+      quantity:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.BasketProductResponse:
+    properties:
+      basketProducts:
+        items:
+          $ref: '#/definitions/models.BasketProduct'
+        type: array
+      count:
+        type: integer
+    type: object
+  models.BasketResponse:
+    properties:
+      baskets:
+        items:
+          $ref: '#/definitions/models.Basket'
+        type: array
+      count:
+        type: integer
+    type: object
+  models.Branch:
+    properties:
+      address:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      phone_number:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.BranchResponse:
+    properties:
+      branches:
+        items:
+          $ref: '#/definitions/models.Branch'
+        type: array
+      count:
+        type: integer
+    type: object
+  models.Category:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.CategoryResponse:
+    properties:
+      category:
+        items:
+          $ref: '#/definitions/models.Category'
+        type: array
+      count:
+        type: integer
+    type: object
+  models.CreateBasket:
+    properties:
+      customer_id:
+        type: string
+      total_sum:
+        type: integer
+    type: object
+  models.CreateBasketProduct:
+    properties:
+      basket_id:
+        type: string
+      product_id:
+        type: string
+      quantity:
+        type: integer
+    type: object
+  models.CreateBranch:
+    properties:
+      address:
+        type: string
+      name:
+        type: string
+      phone_number:
+        type: string
+    type: object
+  models.CreateCategory:
+    properties:
+      name:
+        type: string
+    type: object
+  models.CreateIncomeProduct:
+    properties:
+      income_id:
+        type: string
+      price:
+        type: integer
+      product_id:
+        type: string
+      quantity:
+        type: integer
+    type: object
+  models.CreateIncomeProducts:
+    properties:
+      income_products:
+        items:
+          $ref: '#/definitions/models.CreateIncomeProduct'
+        type: array
+    type: object
+  models.CreateProduct:
+    properties:
+      branch_id:
+        type: string
+      category_id:
+        type: string
+      name:
+        type: string
+      original_price:
+        type: integer
+      price:
+        type: integer
+      quantity:
+        type: integer
+    type: object
+  models.CreateUser:
+    properties:
+      branch_id:
+        type: string
+      cash:
+        type: integer
+      full_name:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      user_type:
+        type: string
+    type: object
+  models.Income:
+    properties:
+      external_id:
+        type: string
+      id:
+        type: string
+      total_sum:
+        type: integer
+    type: object
+  models.Product:
+    properties:
+      branch_id:
+        type: string
+      category_id:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      original_price:
+        type: integer
+      price:
+        type: integer
+      quantity:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.Response:
+    properties:
+      data: {}
+      description:
+        type: string
+      statusCode:
+        type: integer
+    type: object
+  models.SellRequest:
+    properties:
+      basket_id:
+        type: string
+      branch_id:
+        type: string
+      products:
+        additionalProperties:
+          type: integer
+        type: object
+    type: object
+  models.UpdateBasket:
+    properties:
+      customer_id:
+        type: string
+      total_sum:
+        type: integer
+    type: object
+  models.UpdateBasketProduct:
+    properties:
+      product_id:
+        type: string
+      quantity:
+        type: integer
+    type: object
+  models.UpdateBranch:
+    properties:
+      address:
+        type: string
+      name:
+        type: string
+      phone_number:
+        type: string
+    type: object
+  models.UpdateCategory:
+    properties:
+      name:
+        type: string
+    type: object
+  models.UpdateProduct:
+    properties:
+      category_id:
+        type: string
+      name:
+        type: string
+      original_price:
+        type: integer
+      price:
+        type: integer
+      quantity:
+        type: integer
+    type: object
+  models.UpdateUser:
+    properties:
+      cash:
+        type: integer
+      full_name:
+        type: string
+      phone:
+        type: string
+    type: object
+  models.UpdateUserPassword:
+    properties:
+      new_password:
+        type: string
+      old_password:
+        type: string
+    type: object
+  models.User:
+    properties:
+      branch_id:
+        type: string
+      cash:
+        type: integer
+      created_at:
+        type: string
+      full_name:
+        type: string
+      id:
+        type: string
+      password:
+        type: string
+      phone:
+        type: string
+      updated_at:
+        type: string
+      user_type:
+        type: string
+    type: object
+  models.UsersResponse:
+    properties:
+      count:
+        type: integer
+      users:
+        items:
+          $ref: '#/definitions/models.User'
+        type: array
+    type: object
+info:
+  contact: {}
+  description: This is a sample server celler server.
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /basket:
+    post:
+      consumes:
+      - application/json
+      description: create a new basket
+      parameters:
+      - description: basket
+        in: body
+        name: basket
+        schema:
+          $ref: '#/definitions/models.CreateBasket'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Basket'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Creates a new basket
+      tags:
+      - basket
+  /basket/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete basket
+      parameters:
+      - description: basket_id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Delete basket
+      tags:
+      - basket
+    get:
+      consumes:
+      - application/json
+      description: get basket by id
+      parameters:
+      - description: basket_id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Basket'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get basket by id
+      tags:
+      - basket
+    put:
+      consumes:
+      - application/json
+      description: update basket
+      parameters:
+      - description: basket_id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: basket
+        in: body
+        name: basket
+        schema:
+          $ref: '#/definitions/models.UpdateBasket'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Basket'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Update basket
+      tags:
+      - basket
+  /basketProduct:
+    post:
+      consumes:
+      - application/json
+      description: create a new basketProduct
+      parameters:
+      - description: basket
+        in: body
+        name: basket
+        schema:
+          $ref: '#/definitions/models.CreateBasketProduct'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.BasketProduct'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Creates a new basketProduct
+      tags:
+      - basketProduct
+  /basketProduct/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete basketProduct
+      parameters:
+      - description: basketProduct_id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Delete basketProduct
+      tags:
+      - basketProduct
+    get:
+      consumes:
+      - application/json
+      description: get basketProduct by id
+      parameters:
+      - description: basketProduct_id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.BasketProduct'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get basketProduct by id
+      tags:
+      - basketProduct
+    put:
+      consumes:
+      - application/json
+      description: update basketProduct
+      parameters:
+      - description: basketProduct_id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: basketProduct
+        in: body
+        name: basketProduct
+        schema:
+          $ref: '#/definitions/models.UpdateBasketProduct'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.BasketProduct'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Update basketProduct
+      tags:
+      - basketProduct
+  /basketProducts:
+    get:
+      consumes:
+      - application/json
+      description: get basket list
+      parameters:
+      - description: page
+        in: query
+        name: page
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: search
+        in: query
+        name: search
+        type: string
+      - description: basket_id
+        in: query
+        name: basket_id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.BasketProductResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get basket list
+      tags:
+      - basketProduct
+  /baskets:
+    get:
+      consumes:
+      - application/json
+      description: get basket list
+      parameters:
+      - description: page
+        in: query
+        name: page
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: search
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.BasketResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get basket list
+      tags:
+      - basket
+  /branch:
+    post:
+      consumes:
+      - application/json
+      description: create a new branch
+      parameters:
+      - description: branch
+        in: body
+        name: branch
+        schema:
+          $ref: '#/definitions/models.CreateBranch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Branch'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Create a new branch
+      tags:
+      - branch
+  /branch/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete branch
+      parameters:
+      - description: branch_id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Delete branch
+      tags:
+      - branch
+    get:
+      consumes:
+      - application/json
+      description: get branch by id
+      parameters:
+      - description: branch_id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Branch'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get branch by id
+      tags:
+      - branch
+    put:
+      consumes:
+      - application/json
+      description: update branch
+      parameters:
+      - description: branch_id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: branch
+        in: body
+        name: branch
+        schema:
+          $ref: '#/definitions/models.UpdateBranch'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Branch'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Update branch
+      tags:
+      - branch
+  /branches:
+    get:
+      consumes:
+      - application/json
+      description: get branch list
+      parameters:
+      - description: page
+        in: query
+        name: page
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: search
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.BranchResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get branch list
+      tags:
+      - branch
+  /categories:
+    get:
+      consumes:
+      - application/json
+      description: get category list
+      parameters:
+      - description: page
+        in: query
+        name: page
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: search
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.CategoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get category list
+      tags:
+      - category
+  /category:
+    post:
+      consumes:
+      - application/json
+      description: create a new category
+      parameters:
+      - description: category
+        in: body
+        name: category
+        schema:
+          $ref: '#/definitions/models.CreateCategory'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Category'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Creates a new category
+      tags:
+      - category
+  /category/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete category
+      parameters:
+      - description: category_id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Delete category
+      tags:
+      - category
+    get:
+      consumes:
+      - application/json
+      description: get category by id
+      parameters:
+      - description: category_id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Category'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get category by id
+      tags:
+      - category
+    put:
+      consumes:
+      - application/json
+      description: update category
+      parameters:
+      - description: category_id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: category
+        in: body
+        name: category
+        schema:
+          $ref: '#/definitions/models.UpdateCategory'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Update category
+      tags:
+      - category
+  /income:
+    post:
+      consumes:
+      - application/json
+      description: create a new income
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Income'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Creates a new income
+      tags:
+      - income
+  /income_products:
+    post:
+      consumes:
+      - application/json
+      description: create a new income products
+      parameters:
+      - description: income_products
+        in: body
+        name: income_products
+        schema:
+          $ref: '#/definitions/models.CreateIncomeProducts'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Creates a new income products
+      tags:
+      - income_product
+  /product:
+    post:
+      consumes:
+      - application/json
+      description: create a new product
+      parameters:
+      - description: product
+        in: body
+        name: product
+        schema:
+          $ref: '#/definitions/models.CreateProduct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Create a new product
+      tags:
+      - product
+  /product/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete product
+      parameters:
+      - description: product_id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Delete product
+      tags:
+      - product
+    get:
+      consumes:
+      - application/json
+      description: get product by id
+      parameters:
+      - description: product_id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get product by id
+      tags:
+      - product
+    put:
+      consumes:
+      - application/json
+      description: update product
+      parameters:
+      - description: product_id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: product
+        in: body
+        name: product
+        schema:
+          $ref: '#/definitions/models.UpdateProduct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Update product
+      tags:
+      - product
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: get product list
+      parameters:
+      - description: page
+        in: query
+        name: page
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: search
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Product'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get product list
+      tags:
+      - product
+  /sell-new:
+    post:
+      consumes:
+      - application/json
+      description: selling products
+      parameters:
+      - description: sell_request
+        in: body
+        name: sell_request
+        schema:
+          $ref: '#/definitions/models.SellRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Selling products
+      tags:
+      - product
+  /user:
+    post:
+      consumes:
+      - application/json
+      description: create a new user
+      parameters:
+      - description: user
+        in: body
+        name: user
+        schema:
+          $ref: '#/definitions/models.CreateUser'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Creates a new user
+      tags:
+      - user
+  /user/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete user
+      parameters:
+      - description: user_id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Delete user
+      tags:
+      - user
+    get:
+      consumes:
+      - application/json
+      description: get user by ID
+      parameters:
+      - description: user
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Gets user
+      tags:
+      - user
+    patch:
+      consumes:
+      - application/json
+      description: update user password
+      parameters:
+      - description: user_id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateUserPassword'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Update user password
+      tags:
+      - user
+    put:
+      consumes:
+      - application/json
+      description: update user
+      parameters:
+      - description: user_id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.User'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Update user
+      tags:
+      - user
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: get user list
+      parameters:
+      - description: page
+        in: query
+        name: page
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: search
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UsersResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get user list
+      tags:
+      - user
+swagger: "2.0"
