@@ -3,11 +3,12 @@ package postgres
 import (
 	"context"
 	"fmt"
-	"github.com/golang-migrate/migrate/v4"
-	"github.com/jackc/pgx/v5/pgxpool"
 	"strings"
 	"test/config"
 	"test/storage"
+
+	"github.com/golang-migrate/migrate/v4"
+	"github.com/jackc/pgx/v5/pgxpool"
 
 	_ "github.com/golang-migrate/migrate/v4/database"          //database is needed for migration
 	_ "github.com/golang-migrate/migrate/v4/database/postgres" //postgres is used for database

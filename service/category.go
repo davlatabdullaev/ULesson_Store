@@ -4,9 +4,10 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/jackc/pgx/v5"
 	"test/api/models"
 	"test/storage"
+
+	"github.com/jackc/pgx/v5"
 )
 
 type categoryService struct {

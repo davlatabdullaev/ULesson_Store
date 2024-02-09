@@ -2,9 +2,10 @@ package handler
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"test/api/models"
 	"test/service"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Handler struct {

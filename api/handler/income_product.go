@@ -2,9 +2,10 @@ package handler
 
 import (
 	"context"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"test/api/models"
+
+	"github.com/gin-gonic/gin"
 )
 
 // CreateIncomeProducts godoc
