@@ -35,22 +35,35 @@ func (c *categoryRepo) Create(ctx context.Context, category models.CreateCategor
 }
 
 func (c *categoryRepo) GetByID(ctx context.Context, key models.PrimaryKey) (models.Category, error) {
+
 	createdAt, updatedAt := sql.NullString{}, sql.NullString{}
+
 	category := models.Category{}
 
 	query := `select id, name, created_at, updated_at from categories where id = $1 and deleted_at = 0`
+
 	if err := c.db.QueryRow(ctx, query, key.ID).Scan(&category.ID, &category.Name, &createdAt, &updatedAt); err != nil {
+
 		fmt.Println("error is while getting by id", err.Error())
+
 		return models.Category{}, err
+
 	}
+
 	if createdAt.Valid {
+
 		category.CreatedAt = createdAt.String
+
 	}
 
 	if updatedAt.Valid {
+
 		category.UpdatedAt = updatedAt.String
+
 	}
+
 	return category, nil
+
 }
 
 func (c *categoryRepo) GetList(ctx context.Context, request models.GetListRequest) (models.CategoryResponse, error) {

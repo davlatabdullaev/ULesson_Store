@@ -10,3 +10,8 @@ type IncomesResponse struct {
 	Incomes []Income `json:"incomes"`
 	Count   int      `json:"count"`
 }
+
+type UpdateIncome struct {
+	ID         string `json:"id"`
+	TotalSum   int    `json:"total_sum"`
+}

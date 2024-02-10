@@ -1,6 +1,24 @@
 package helper
 
-func GenerateExternalID(extID string) string { // (I-0099) I-0100
-	// logic
-	return ""
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
+
+func GenerateExternalID(input string) string {
+	parts := strings.Split(input, "-")
+	if len(parts) != 2 {
+		return ""
+	}
+
+	numStr := parts[1]
+	num, err := strconv.Atoi(numStr)
+	if err != nil {
+		return ""
+	}
+
+	nextNum := num + 1
+	nextID := fmt.Sprintf("I-%04d", nextNum)
+	return nextID
 }
