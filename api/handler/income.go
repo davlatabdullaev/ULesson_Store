@@ -27,3 +27,6 @@ func (h Handler) CreateIncome(c *gin.Context) {
 
 	handleResponse(c, "", http.StatusCreated, resp)
 }
+
+// GetIncomeByID godoc
+//

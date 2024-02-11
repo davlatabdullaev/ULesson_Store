@@ -87,6 +87,7 @@ type IIncomeStorage interface {
 	Create(context.Context) (models.Income, error)
 	GetByID(context.Context, models.PrimaryKey) (models.Income, error)
 	GetList(context.Context, models.GetListRequest) (models.IncomesResponse, error)
+	Delete(context.Context, models.PrimaryKey) error
 }
 
 type IIncomeProductStorage interface {

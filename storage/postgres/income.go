@@ -153,7 +153,7 @@ func (i *incomeRepo) Delete(ctx context.Context, key models.PrimaryKey) error {
 	}
 
 	if err != nil {
-		log.Println("error while delteing incomes")
+		log.Println("error while deleting incomes")
 	}
 
 	return nil

@@ -26,3 +26,11 @@ func (i incomeService) Create(ctx context.Context) (models.Income, error) {
 
 	return income, nil
 }
+
+// func (i incomeService) Get(ctx context.Context) (models.Income, error) {
+
+// 	// income, err := i.storage.Income().GetByID(ctx, models.PrimaryKey{
+// 	// 	ID: id,
+// 	// })
+
+// }
