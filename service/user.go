@@ -60,6 +60,7 @@ func (u userService) GetUsers(ctx context.Context, request models.GetListRequest
 }
 
 func (u userService) Update(ctx context.Context, updateUser models.UpdateUser) (models.User, error) {
+
 	pKey, err := u.storage.User().Update(ctx, updateUser)
 	if err != nil {
 		fmt.Println("ERROR in service layer while updating updateUser", err.Error())
