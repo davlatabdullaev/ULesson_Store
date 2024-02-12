@@ -167,6 +167,13 @@ definitions:
       user_type:
         type: string
     type: object
+  models.DeleteIncomeProducts:
+    properties:
+      ids:
+        items:
+          $ref: '#/definitions/models.PrimaryKey'
+        type: array
+    type: object
   models.Income:
     properties:
       external_id:
@@ -175,6 +182,49 @@ definitions:
         type: string
       total_sum:
         type: integer
+    type: object
+  models.IncomeProduct:
+    properties:
+      id:
+        type: string
+      income_id:
+        type: string
+      price:
+        type: integer
+      product_id:
+        type: string
+      quantity:
+        type: integer
+    type: object
+  models.IncomeProducts:
+    properties:
+      income_products:
+        items:
+          $ref: '#/definitions/models.IncomeProduct'
+        type: array
+    type: object
+  models.IncomeProductsResponse:
+    properties:
+      count:
+        type: integer
+      income_products:
+        items:
+          $ref: '#/definitions/models.IncomeProduct'
+        type: array
+    type: object
+  models.IncomesResponse:
+    properties:
+      count:
+        type: integer
+      incomes:
+        items:
+          $ref: '#/definitions/models.Income'
+        type: array
+    type: object
+  models.PrimaryKey:
+    properties:
+      id:
+        type: string
     type: object
   models.Product:
     properties:
@@ -1040,7 +1090,143 @@ paths:
       summary: Creates a new income
       tags:
       - income
+  /income/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete income
+      parameters:
+      - description: income_id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Delete income
+      tags:
+      - income
+    get:
+      consumes:
+      - application/json
+      description: get income by id
+      parameters:
+      - description: income_id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Income'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get income by id
+      tags:
+      - income
   /income_products:
+    delete:
+      consumes:
+      - application/json
+      description: delete income products
+      parameters:
+      - description: ids
+        in: body
+        name: ids
+        schema:
+          $ref: '#/definitions/models.DeleteIncomeProducts'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Delete income products
+      tags:
+      - income_products
+    get:
+      consumes:
+      - application/json
+      description: get income products list
+      parameters:
+      - description: page
+        in: query
+        name: page
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: search
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.IncomeProductsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get income products list
+      tags:
+      - income_products
     post:
       consumes:
       - application/json
@@ -1072,7 +1258,79 @@ paths:
             $ref: '#/definitions/models.Response'
       summary: Creates a new income products
       tags:
-      - income_product
+      - income_products
+    put:
+      consumes:
+      - application/json
+      description: update income products
+      parameters:
+      - description: income_products
+        in: body
+        name: income_products
+        schema:
+          $ref: '#/definitions/models.IncomeProducts'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Update income products
+      tags:
+      - income_products
+  /incomes:
+    get:
+      consumes:
+      - application/json
+      description: get incomes list
+      parameters:
+      - description: page
+        in: query
+        name: page
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: string
+      - description: search
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.IncomesResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/models.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/models.Response'
+      summary: Get incomes list
+      tags:
+      - income
   /product:
     post:
       consumes:

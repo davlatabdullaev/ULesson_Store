@@ -92,4 +92,7 @@ type IIncomeStorage interface {
 
 type IIncomeProductStorage interface {
 	CreateMultiple(context.Context, models.CreateIncomeProducts) error
+	GetList(context.Context, models.GetListRequest) (models.IncomeProductsResponse, error)
+	UpdateMultiple(context.Context, models.IncomeProducts) error
+	DeleteMultiple(context.Context, models.DeleteIncomeProducts) error
 }

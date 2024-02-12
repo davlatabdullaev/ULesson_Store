@@ -56,14 +56,14 @@ func New(services service.IServiceManager) *gin.Engine {
 	r.DELETE("/branch/:id", h.DeleteBranch)
 
 	r.POST("/income", h.CreateIncome) // create
-	// r.GET("/income/:id", )              // get by id
-	// r.GET("/incomes")                 // get list
-	// r.DELETE("/income/:id")           // delete
+	r.GET("/income/:id", h.GetIncome)              // get by id
+	r.GET("/incomes", h.GetIncomeList)                 // get list
+	r.DELETE("/income/:id", h.DeleteIncome)           // delete
 
 	r.POST("/income_products", h.CreateIncomeProducts) // create multiple
-	//r.GET("/income_products")   // get income products (filter => by income_id)
-	//r.PUT("/income_product")    // update multiple
-	//r.DELETE("/income_product") // delete multiple
+	r.GET("/income_products", h.GetIncomeProductsList)   // get income products (filter => by income_id)
+	r.PUT("/income_products", h.UpdateIncomeProducts)    // update multiple
+	r.DELETE("/income_products", h.DeleteIncomeProducts) // delete multiple
 
 	r.POST("/sell-new", h.StartSellNew)
 
