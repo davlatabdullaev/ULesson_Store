@@ -19,8 +19,8 @@ func TestBasketRepo_Create(t *testing.T) {
 	}
 
 	createBasket := models.CreateBasket{
-		CustomerID: "",
-		TotalSum:   0,
+		CustomerID: "6df52ee6-8dbf-42fb-be0d-9810038f909fq",
+		TotalSum:   1000,
 	}
 
 	basketID, err := pgStore.Basket().Create(context.Background(), createBasket)
@@ -84,8 +84,8 @@ func TestBasketRepo_GetList(t *testing.T) {
 		t.Errorf("error while getting basketResp error: %v", err)
 	}
 
-	if len(basketResp.Baskets) != 2 {
-		t.Errorf("expected 16, but got: %d", len(basketResp.Baskets))
+	if len(basketResp.Baskets) != 1 {
+		t.Errorf("expected 1, but got: %d", len(basketResp.Baskets))
 	}
 
 	assert.Equal(t, len(basketResp.Baskets), 2)
@@ -100,7 +100,7 @@ func TestBasketRepo_Update(t *testing.T) {
 		t.Errorf("error while connection to db error: %v", err)
 	}
 	createBasket := models.CreateBasket{
-		CustomerID: "",
+		CustomerID: "6df52ee6-8dbf-42fb-be0d-9810038f909f",
 		TotalSum:   0,
 	}
 
@@ -111,7 +111,7 @@ func TestBasketRepo_Update(t *testing.T) {
 
 	updateBasket := models.UpdateBasket{
 		ID:         basketID,
-		CustomerID: "",
+		CustomerID: "6df52ee6-8dbf-42fb-be0d-9810038f909f",
 		TotalSum:   0,
 	}
 
